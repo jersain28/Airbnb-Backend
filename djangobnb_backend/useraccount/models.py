@@ -3,7 +3,7 @@ from django.db import models
 
 # Create your models here.
 from django.conf import settings
-from django.contrib.auth.models import AbstractUser, UserManager, AbstractBaseUser, PermissionsMixin, BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, UserManager, AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.db import models
 
 class CustomUserManager(UserManager):
@@ -29,7 +29,7 @@ class CustomUserManager(UserManager):
         return self._create_user(name, email, password, **extra_fields)
     
 class User(AbstractBaseUser, PermissionsMixin):
-    id = models.AutoField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     email = models.EmailField(unique=True)
     name = models.CharField(max_length=255, blank=True, null=True)
     avatar = models.ImageField(upload_to='uploads/avatars')
@@ -39,7 +39,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
 
     date_joined = models.DateTimeField(auto_now_add=True)
-    last_login = models.DateTimeField(auto_now=True)
+    last_login = models.DateTimeField(blank=True, null=True)
   
     objects = CustomUserManager()
 
