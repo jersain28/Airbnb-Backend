@@ -44,6 +44,8 @@ def properties_list(request):
     bedrooms = request.GET.get('numBedrooms', '')
     guests = request.GET.get('numGuests', '')
     bathrooms = request.GET.get('numBathrooms', '')
+
+    print('country', country)
     
     if checkin_date and checkout_date:
         exact_matches = Reservation.objects.filter(start_date=checkin_date) | Reservation.objects.filter(end_date=checkout_date)
