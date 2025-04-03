@@ -9,14 +9,14 @@ class ConversationListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Conversation
-        fields = ('id', 'users', 'created_at', 'modified_at',)
+        fields = ('id', 'users', 'modified_at',)
 
 class ConversationDetailSerializer(serializers.ModelSerializer):
-     users = UserDetailSerializer(many=True, read_only=True)
+    users = UserDetailSerializer(many=True, read_only=True)
 
-     class Meta:
+    class Meta:
         model = Conversation
-        fields = ('id', 'users', 'created_at', 'modified_at',)
+        fields = ('id', 'users', 'modified_at',)
 
 class ConversationMessageSerializer(serializers.ModelSerializer):
     sent_to = UserDetailSerializer(many=False, read_only=True)
